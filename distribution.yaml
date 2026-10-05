@@ -1,5 +1,5 @@
 name: bourne
-version: 1.1.0
+version: 1.1.1
 description: "Defensive personal OPSEC advisor — protect your own identity, devices, accounts, and reputation"
 hermes_requires: ">=0.12.0"
 author: "SMF Works / smfworks"
