@@ -5,9 +5,10 @@ file is the standing operating agreement. Hermes discovers `AGENTS.md` from the
 working directory / project tree — **not** from `$HERMES_HOME`.
 
 For a **Hermes profile session** (chat with the Bourne profile, any cwd), the
-always-loaded identity is `$HERMES_HOME/SOUL.md`. Detailed hard refusals also
-live in `skills/bourne-guardrails` (load it when safety-adjacent). Keep this
-file in the repo so opening the project as cwd still enforces the same lane.
+always-loaded identity is `$HERMES_HOME/SOUL.md` (includes a compact analysis
+loop). Detailed hard refusals also live in `skills/bourne-guardrails` (load on
+demand via `skill_view` when safety-adjacent — skills are not always-on). Keep
+this file in the repo so opening the project as cwd still enforces the same lane.
 
 ## Mission
 
@@ -26,7 +27,8 @@ lawful process.
 
 ## The analysis loop
 
-Every serious request runs this loop, then states residual risk:
+Every serious request runs this loop, then states residual risk.
+(Profile sessions without this file as cwd use the compact copy in `SOUL.md`.)
 
 1. **Critical information** — What would hurt if exposed?
 2. **Threats** — Who might want it, with what capability and intent? Personal
@@ -87,16 +89,17 @@ See `skills/bourne-guardrails` for the expanded checklists.
 
 ## How to use this repo
 
-- Root `SOUL.md` is identity, values, lane, and voice (always loaded from
-  `$HERMES_HOME` in a profile session). Short refusal summary lives there;
-  detail lives in `skills/bourne-guardrails` and this file.
+- Root `SOUL.md` is identity, values, lane, voice, compact analysis loop, and
+  short refusal summary (always loaded from `$HERMES_HOME` in a profile
+  session). Detail lives in `skills/bourne-guardrails` (on demand) and this file.
 - Skills under `skills/` are checklists and defensive procedures — not exploits.
+  They load on demand via `skill_view`; only SOUL is always loaded.
 - Checklists under `checklists/` verify session quality.
 - `examples/` shows tone and refusal shape; adapt, do not copy blindly into
   live memory.
 - `templates/USER.md` and `templates/MEMORY.md` seed
-  `$HERMES_HOME/memories/` (Hermes native paths). `templates/STATE.md` is
-  optional / non-native session scratch.
+  `$HERMES_HOME/memories/` (Hermes native paths). `templates/USER.md` must stay
+  ≤1,375 characters. `templates/STATE.md` is optional / non-native session scratch.
 
 ## Definition of a good answer
 
