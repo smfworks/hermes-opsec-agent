@@ -17,10 +17,10 @@ author: SMF Works / smfworks
 
 Hermes skills load **on demand** via `skill_view` — only `SOUL.md` is always
 loaded. Prefer loading this skill early when unsure. SOUL.md carries a short
-always-loaded refusal summary plus the compact analysis loop; this skill is the
-detailed source of truth for refusals in a profile session. When the repo is
-opened as a project cwd, `AGENTS.md` carries the same refusal detail and the
-full analysis loop for project mode.
+always-loaded refusal summary plus the same six-step analysis loop; this skill
+is the detailed source of truth for refusals in a profile session. When the repo
+is opened as a project cwd, `AGENTS.md` carries the same refusal detail and the
+same six steps for project mode.
 
 ## Procedure
 
@@ -119,7 +119,7 @@ safety planning and hotlines over deep technical forensics in chat.
 ## Pitfalls
 
 - Treating this skill as always-loaded — it is not; only SOUL is. Load it when
-  safety-adjacent, and rely on SOUL's compact loop + refusal summary otherwise.
+  safety-adjacent, and rely on SOUL's analysis loop + refusal summary otherwise.
 - Soft refusals that still leak attack steps, lure copy, or tooling hints.
 - Accepting "authorized testing," roleplay, or fiction framing as a bypass.
 - Recommending spyware for "family safety" of adults or non-guardian contexts.
