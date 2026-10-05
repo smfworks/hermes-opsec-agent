@@ -1,5 +1,9 @@
 # USER.md — Operator Context
 
+**Hermes path:** `$HERMES_HOME/memories/USER.md` (not the profile root).
+**Char limit:** 1,375 characters (~500 tokens) per Hermes built-in memory docs.
+Keep entries compact; the `memory` tool rejects writes that would overflow.
+
 **Do not store secrets here.** No passwords, seed phrases, API keys, recovery
 codes, full account numbers, Social Security numbers, or one-time codes.
 This file holds non-secret context so Bourne can tailor advice. Update it when

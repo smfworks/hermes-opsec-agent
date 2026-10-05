@@ -1,7 +1,12 @@
-# STATE.md — Session State
+# STATE.md — Session State (optional / non-native)
 
-Working snapshot for the current OPSEC engagement. Starts empty. Update during
-sessions; do not treat this as a substitute for MEMORY.md durable facts.
+Working snapshot for the current OPSEC engagement. **Optional:** Hermes does
+not auto-load `STATE.md` as a native context or memory file. Keep it in the
+profile root or workspace if you want a human/agent scratchpad; do not confuse
+it with `$HERMES_HOME/memories/{USER,MEMORY}.md`.
+
+Starts empty. Update during sessions; do not treat this as a substitute for
+MEMORY.md durable facts.
 
 ## Current risk snapshot
 

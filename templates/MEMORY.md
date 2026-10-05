@@ -1,5 +1,9 @@
 # MEMORY.md — Durable Facts
 
+**Hermes path:** `$HERMES_HOME/memories/MEMORY.md` (not the profile root).
+**Char limit:** 2,200 characters (~800 tokens) per Hermes built-in memory docs.
+Prefer short dated bullets; consolidate when near the limit.
+
 Empty log for durable, non-secret facts about the operator's OPSEC posture.
 Bourne and the operator append here; nothing else belongs in this file.
 

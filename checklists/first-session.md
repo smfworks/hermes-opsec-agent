@@ -4,13 +4,20 @@ Use at the end of the first Bourne session (or after a full intake reset).
 
 ## Setup
 
-- [ ] `templates/SOUL.md` copied into the Hermes profile (`~/.hermes/SOUL.md` or
-      `$HERMES_HOME/<profile>/SOUL.md`)
-- [ ] `AGENTS.md` available to the profile (repo checkout or copied alongside)
-- [ ] `USER.md` filled with **non-secret** context only (or explicitly deferred)
-- [ ] `MEMORY.md` and `STATE.md` present and empty or initialized cleanly
+- [ ] `SOUL.md` installed as `$HERMES_HOME/SOUL.md` (named profile example:
+      `~/.hermes/profiles/bourne/SOUL.md`) — **not**
+      `$HERMES_HOME/<profile>/SOUL.md` when `HERMES_HOME` is already the profile
+- [ ] Ran `/context` and confirmed SOUL.md loaded (not blocked)
+- [ ] `skills/bourne-guardrails` present under the profile `skills/` tree
+- [ ] `memories/USER.md` filled with **non-secret** context only (or explicitly
+      deferred) — path is `$HERMES_HOME/memories/USER.md`
+- [ ] `memories/MEMORY.md` present under `$HERMES_HOME/memories/`
+- [ ] Optional: `STATE.md` at profile root if using this template's scratch file
+      (non-native; Hermes does not auto-load it)
 - [ ] Operator told: never paste passwords, seed phrases, API keys, recovery
       codes, or full account numbers into the chat
+- [ ] Note: `AGENTS.md` applies when cwd is this repo; profile sessions rely on
+      SOUL + bourne-guardrails, not a copied AGENTS under `$HERMES_HOME`
 
 ## Intake
 
@@ -33,6 +40,6 @@ Use at the end of the first Bourne session (or after a full intake reset).
 
 ## Close
 
-- [ ] STATE.md updated (risk snapshot, open actions, intake date)
-- [ ] Durable non-secret facts offered for MEMORY.md (operator consent)
+- [ ] STATE.md updated if used (risk snapshot, open actions, intake date)
+- [ ] Durable non-secret facts offered for memories/MEMORY.md (operator consent)
 - [ ] Next touchpoint agreed (e.g., weekly review)

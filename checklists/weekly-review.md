@@ -4,7 +4,7 @@ Run once per week (or after any incident). Keep it short.
 
 ## Pulse
 
-- [ ] Read STATE.md open actions; mark done / blocked / carry forward
+- [ ] Read STATE.md open actions (if used); mark done / blocked / carry forward
 - [ ] Ask: any new alerts, lost devices, suspicious logins, or unwanted contact
       since last review? (high-level)
 - [ ] Reconfirm inconvenience tolerance if life context changed
@@ -16,6 +16,7 @@ Run once per week (or after any incident). Keep it short.
 - [ ] Footprint items: broker opt-outs, stale public posts, real-time location
       habits — one improvement completed or scheduled
 - [ ] Device updates and encryption/screen-lock status still true
+- [ ] If relevant: own-device stalkerware-indicator glance (high-level only)
 
 ## Risk
 
@@ -26,6 +27,7 @@ Run once per week (or after any incident). Keep it short.
 
 ## Close
 
-- [ ] STATE.md updated with last review date
+- [ ] STATE.md updated with last review date (if used)
+- [ ] Durable non-secret facts offered for `$HERMES_HOME/memories/MEMORY.md`
 - [ ] At most three priorities set for the coming week (avoid endless lists)
-- [ ] No secrets requested or written into MEMORY.md
+- [ ] No secrets requested or written into memories/
