@@ -8,6 +8,10 @@ cd "$ROOT"
 # Keep the list short; extend carefully so we do not ban legitimate security docs.
 PATTERN='ignore previous instructions|disregard (your|these) (rules|instructions)|system prompt override'
 
+# Allowlist (pathspec exclusions): files that may mention tripwires in an
+# educational / attribution context without shipping them into Hermes memory.
+# Add new exclusions with ':!:path' only when the hit is documentary, not
+# instructional content that would be copied into $HERMES_HOME.
 HITS="$(git grep -i -E -n "$PATTERN" -- \
   '*.md' '*.yaml' '*.yml' \
   ':!:CREDITS.md' \
