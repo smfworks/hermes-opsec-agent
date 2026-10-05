@@ -30,16 +30,16 @@ hermes-opsec-agent/
 ├── CREDITS.md                         # Honest attribution
 ├── LICENSE                            # MIT — Saint Michael's Forge / smfworks
 ├── distribution.yaml                  # hermes profile install manifest
-├── SOUL.md                            # Bourne identity (always loaded from $HERMES_HOME)
-├── AGENTS.md                          # Project-cwd operating agreement + refusals
+├── SOUL.md                            # Bourne identity + compact analysis loop (always loaded from $HERMES_HOME)
+├── AGENTS.md                          # Project-cwd operating agreement + full loop + refusals
 ├── REVIEW.md                          # PR review brief for Peyton
 ├── templates/
-│   ├── USER.md                        # Seed → $HERMES_HOME/memories/USER.md
+│   ├── USER.md                        # Seed → $HERMES_HOME/memories/USER.md (must stay ≤1,375 chars)
 │   ├── MEMORY.md                      # Seed → $HERMES_HOME/memories/MEMORY.md
 │   ├── STATE.md                       # Optional / non-native session scratch
 │   └── SOUL.md                        # Pointer to root SOUL.md
 ├── skills/
-│   ├── bourne-guardrails/SKILL.md     # Detailed refusals (load in profile sessions)
+│   ├── bourne-guardrails/SKILL.md     # Detailed refusals (on-demand via skill_view)
 │   ├── opsec-intake/SKILL.md
 │   ├── footprint-review/SKILL.md
 │   ├── account-device-hygiene/SKILL.md
@@ -90,6 +90,10 @@ re-clone once for the `templates/` folder.
 | USER.md | `$HERMES_HOME/memories/USER.md` | 1,375 chars (~500 tokens) |
 | MEMORY.md | `$HERMES_HOME/memories/MEMORY.md` | 2,200 chars (~800 tokens) |
 
+`templates/USER.md` in this repo is kept **under** the 1,375-character budget so
+it can be copied as-is. If you expand fields after install, re-check the count —
+the Hermes `memory` tool rejects writes that would overflow.
+
 `STATE.md` is optional session scratch for this template; Hermes does not load
 it as a native context file.
 
@@ -105,7 +109,7 @@ In a Bourne chat session:
 ```
 
 Confirm `SOUL.md` is listed and not blocked. Confirm project `AGENTS.md` only
-when your cwd is this repo (profile sessions rely on SOUL + skills, not a
+when your cwd is this repo (profile sessions rely on SOUL + on-demand skills, not a
 copied AGENTS.md under `$HERMES_HOME`).
 
 Update later:
@@ -150,9 +154,10 @@ cp -R skills/incident-containment    "$PROFILE_DIR/skills/"
 
 Do **not** rely on copying `AGENTS.md` into the profile home for refusals in a
 profile session — Hermes loads `AGENTS.md` from the project cwd, not from
-`$HERMES_HOME`. Refusals for profile chat come from `SOUL.md` (always loaded)
-and `skills/bourne-guardrails`. Keep `AGENTS.md` in the repo for when someone
-opens this repository as a project.
+`$HERMES_HOME`. Refusals for profile chat come from `SOUL.md` (always loaded;
+includes the compact analysis loop) and `skills/bourne-guardrails` (load on
+demand via `skill_view` when safety-adjacent). Keep `AGENTS.md` in the repo for
+when someone opens this repository as a project.
 
 ## First session
 
