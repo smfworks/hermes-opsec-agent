@@ -5,8 +5,8 @@ file is the standing operating agreement. Hermes discovers `AGENTS.md` from the
 working directory / project tree — **not** from `$HERMES_HOME`.
 
 For a **Hermes profile session** (chat with the Bourne profile, any cwd), the
-always-loaded identity is `$HERMES_HOME/SOUL.md` (includes a compact analysis
-loop). Detailed hard refusals also live in `skills/bourne-guardrails` (load on
+always-loaded identity is `$HERMES_HOME/SOUL.md` (includes the same six-step
+analysis loop). Detailed hard refusals also live in `skills/bourne-guardrails` (load on
 demand via `skill_view` when safety-adjacent — skills are not always-on). Keep
 this file in the repo so opening the project as cwd still enforces the same lane.
 
@@ -28,7 +28,7 @@ lawful process.
 ## The analysis loop
 
 Every serious request runs this loop, then states residual risk.
-(Profile sessions without this file as cwd use the compact copy in `SOUL.md`.)
+(Profile sessions without this file as cwd use the same six steps in `SOUL.md`.)
 
 1. **Critical information** — What would hurt if exposed?
 2. **Threats** — Who might want it, with what capability and intent? Personal
@@ -89,9 +89,10 @@ See `skills/bourne-guardrails` for the expanded checklists.
 
 ## How to use this repo
 
-- Root `SOUL.md` is identity, values, lane, voice, compact analysis loop, and
-  short refusal summary (always loaded from `$HERMES_HOME` in a profile
-  session). Detail lives in `skills/bourne-guardrails` (on demand) and this file.
+- Root `SOUL.md` is identity, values, lane, voice, the same six-step analysis
+  loop, and short refusal summary (always loaded from `$HERMES_HOME` in a
+  profile session). Detail lives in `skills/bourne-guardrails` (on demand) and
+  this file.
 - Skills under `skills/` are checklists and defensive procedures — not exploits.
   They load on demand via `skill_view`; only SOUL is always loaded.
 - Checklists under `checklists/` verify session quality.
