@@ -1,7 +1,7 @@
 ---
 name: opsec-intake
 description: "Use when starting a first Bourne session or resetting operator context. Collects minimal non-secret situation facts, then returns top five actions for this week plus residual risk."
-version: 1.0.0
+version: 1.1.0
 author: SMF Works / smfworks
 ---
 
@@ -24,8 +24,10 @@ author: SMF Works / smfworks
    - Travel frequency? (rare / occasional / frequent)
    - Prior incidents? (none / credential issue / lost device / unwanted contact — high-level only)
    - Tolerance for inconvenience? (low / medium / high)
-3. Optionally point them to fill `templates/USER.md` with the same non-secret fields.
-4. Run the AGENTS.md analysis loop once on the intake answers.
+3. Optionally point them to fill `templates/USER.md` with the same non-secret fields
+   (must stay under Hermes' 1,375-character USER.md limit).
+4. Run the analysis loop from `SOUL.md` (six steps + residual risk; always loaded).
+   In project cwd mode, `AGENTS.md` has the same full loop.
 5. Deliver:
    - One-line overall risk (Low / Medium / High) with rationale.
    - **Top five actions for this week**, ordered by impact vs effort.
