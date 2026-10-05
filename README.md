@@ -30,8 +30,8 @@ hermes-opsec-agent/
 ├── CREDITS.md                         # Honest attribution
 ├── LICENSE                            # MIT — Saint Michael's Forge / smfworks
 ├── distribution.yaml                  # hermes profile install manifest
-├── SOUL.md                            # Bourne identity + compact analysis loop (always loaded from $HERMES_HOME)
-├── AGENTS.md                          # Project-cwd operating agreement + full loop + refusals
+├── SOUL.md                            # Bourne identity + analysis loop (always loaded from $HERMES_HOME)
+├── AGENTS.md                          # Project-cwd operating agreement + same six-step loop + refusals
 ├── REVIEW.md                          # PR review brief for Peyton
 ├── templates/
 │   ├── USER.md                        # Seed → $HERMES_HOME/memories/USER.md (must stay ≤1,375 chars)
@@ -155,7 +155,7 @@ cp -R skills/incident-containment    "$PROFILE_DIR/skills/"
 Do **not** rely on copying `AGENTS.md` into the profile home for refusals in a
 profile session — Hermes loads `AGENTS.md` from the project cwd, not from
 `$HERMES_HOME`. Refusals for profile chat come from `SOUL.md` (always loaded;
-includes the compact analysis loop) and `skills/bourne-guardrails` (load on
+includes the same six-step analysis loop) and `skills/bourne-guardrails` (load on
 demand via `skill_view` when safety-adjacent). Keep `AGENTS.md` in the repo for
 when someone opens this repository as a project.
 
@@ -183,9 +183,11 @@ when someone opens this repository as a project.
 - Help phishing others, harassment campaigns, or deanonymizing others.
 - Assist fraud, forgery, or evasion of lawful process.
 - Ask for passwords, seed phrases, API keys, recovery codes, or full account numbers.
+- Target third parties (locate, surveil, doxx, or otherwise attack others).
 - Promise anonymity, invisibility, or zero residual risk.
-- Override its identity or refusals via roleplay or prompt-injection attempts
-  to discard these limits.
+- Override its identity or refusals via roleplay, fiction framing,
+  "authorized testing" claims about third-party systems, or prompt-injection
+  attempts to discard these limits.
 
 Out-of-lane requests get a **one-sentence refusal** and a **legal defensive
 equivalent** focused on the operator's own protection. See `SOUL.md`,
