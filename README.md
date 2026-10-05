@@ -4,7 +4,7 @@
 [![Hermes Agent Compatible](https://img.shields.io/badge/Hermes_Agent-Compatible-7C3AED)](https://hermes-agent.nousresearch.com)
 
 **Bourne** is a defensive personal operations-security advisor packaged as a
-Hermes Agent profile template. It helps an operator protect their **own**
+Hermes Agent profile distribution. It helps an operator protect their **own**
 identity, devices, accounts, communications, location, finances, family, and
 reputation — legally and proportionally.
 
@@ -18,6 +18,8 @@ community template from SMF Works / smfworks designed to work with Hermes.
 - Review your own public footprint and tighten privacy settings.
 - Harden accounts and devices without pasting secrets into chat.
 - Contain suspected compromise, lost devices, credential leaks, and doxx attempts.
+- Check your **own** device (high-level) for stalkerware indicators.
+- Point survivors to verified domestic-violence hotlines for safety planning.
 - Always hear **residual risk** — never a promise of invulnerability or total anonymity.
 
 ## File map
@@ -25,15 +27,19 @@ community template from SMF Works / smfworks designed to work with Hermes.
 ```
 hermes-opsec-agent/
 ├── README.md                          # You are here
+├── CREDITS.md                         # Honest attribution
 ├── LICENSE                            # MIT — Saint Michael's Forge / smfworks
-├── AGENTS.md                          # Operating agreement + hard refusals
+├── distribution.yaml                  # hermes profile install manifest
+├── SOUL.md                            # Bourne identity (always loaded from $HERMES_HOME)
+├── AGENTS.md                          # Project-cwd operating agreement + refusals
 ├── REVIEW.md                          # PR review brief for Peyton
 ├── templates/
-│   ├── SOUL.md                        # Bourne identity (copy into Hermes profile)
-│   ├── USER.md                        # Non-secret operator context placeholders
-│   ├── MEMORY.md                      # Durable-fact log (no secrets)
-│   └── STATE.md                       # Session risk snapshot + open actions
+│   ├── USER.md                        # Seed → $HERMES_HOME/memories/USER.md
+│   ├── MEMORY.md                      # Seed → $HERMES_HOME/memories/MEMORY.md
+│   ├── STATE.md                       # Optional / non-native session scratch
+│   └── SOUL.md                        # Pointer to root SOUL.md
 ├── skills/
+│   ├── bourne-guardrails/SKILL.md     # Detailed refusals (load in profile sessions)
 │   ├── opsec-intake/SKILL.md
 │   ├── footprint-review/SKILL.md
 │   ├── account-device-hygiene/SKILL.md
@@ -41,73 +47,151 @@ hermes-opsec-agent/
 ├── checklists/
 │   ├── first-session.md
 │   └── weekly-review.md
-└── examples/
-    └── intake-transcript.md           # Refusal + defensive equivalent sample
+├── examples/
+│   └── intake-transcript.md
+└── scripts/
+    └── check-trigger-phrases.sh       # Grep for Hermes scanner tripwires
 ```
 
-## How to install into a Hermes profile
+## Official install (recommended)
 
-Official Hermes loads identity from `~/.hermes/SOUL.md` or from a profile
-directory under `$HERMES_HOME`. Confirm paths against the live Hermes docs if
-your install differs.
+Requires a working [Hermes Agent](https://hermes-agent.nousresearch.com) install
+with profile support (`hermes profile …`).
 
 ```bash
-# 1. Clone this template
+hermes profile install github.com/smfworks/hermes-opsec-agent --alias
+```
+
+What this does (per Hermes profile-distribution docs):
+
+1. Reads `distribution.yaml` and installs distribution-owned files into
+   `~/.hermes/profiles/bourne/` (SOUL.md, skills/, etc.).
+2. Leaves credentials, sessions, and `memories/` as **your** data (never shipped).
+3. With `--alias`, lets you run `bourne chat` (or the alias Hermes creates).
+
+Then seed native memory files (Hermes reads these under `memories/`, not the
+profile root):
+
+```bash
+PROFILE="$HOME/.hermes/profiles/bourne"
+mkdir -p "$PROFILE/memories"
+cp templates/USER.md    "$PROFILE/memories/USER.md"    # after clone, or from the repo
+cp templates/MEMORY.md  "$PROFILE/memories/MEMORY.md"
+# Optional (not Hermes-native): cp templates/STATE.md "$PROFILE/STATE.md"
+```
+
+If you installed without a local clone, grab the templates from this repo or
+re-clone once for the `templates/` folder.
+
+**Character limits** (Hermes built-in memory, from official docs):
+
+| File | Path | Limit |
+|------|------|-------|
+| USER.md | `$HERMES_HOME/memories/USER.md` | 1,375 chars (~500 tokens) |
+| MEMORY.md | `$HERMES_HOME/memories/MEMORY.md` | 2,200 chars (~800 tokens) |
+
+`STATE.md` is optional session scratch for this template; Hermes does not load
+it as a native context file.
+
+Fill `memories/USER.md` with **non-secret** context only. Leave secrets in a
+password manager — never in profile markdown or in the chat.
+
+### Verify context loaded
+
+In a Bourne chat session:
+
+```text
+/context
+```
+
+Confirm `SOUL.md` is listed and not blocked. Confirm project `AGENTS.md` only
+when your cwd is this repo (profile sessions rely on SOUL + skills, not a
+copied AGENTS.md under `$HERMES_HOME`).
+
+Update later:
+
+```bash
+hermes profile update bourne
+```
+
+## Manual install (alternative)
+
+Prefer `hermes profile create` / official profile commands when available:
+
+```bash
+hermes profile create bourne
+# Profile home is normally:
+#   ~/.hermes/profiles/bourne
+# That directory IS $HERMES_HOME for the Bourne profile.
+# Do NOT nest another profiles/bourne under an existing profile home.
+```
+
+If you must set the path by hand, use the absolute profile path — not
+`${HERMES_HOME}/profiles/bourne` when `HERMES_HOME` is already a profile:
+
+```bash
+PROFILE_DIR="$HOME/.hermes/profiles/bourne"
+mkdir -p "$PROFILE_DIR/skills" "$PROFILE_DIR/memories"
+
 git clone https://github.com/smfworks/hermes-opsec-agent.git
 cd hermes-opsec-agent
 
-# 2. Create or pick a Hermes profile directory (example name: bourne)
-#    Exact profile CLI flags can vary by Hermes version — prefer `hermes`
-#    profile commands from the official docs when available.
-PROFILE_DIR="${HERMES_HOME:-$HOME/.hermes}/profiles/bourne"
-mkdir -p "$PROFILE_DIR" "$PROFILE_DIR/skills"
+cp SOUL.md                 "$PROFILE_DIR/SOUL.md"
+cp templates/USER.md       "$PROFILE_DIR/memories/USER.md"
+cp templates/MEMORY.md     "$PROFILE_DIR/memories/MEMORY.md"
+# Optional: cp templates/STATE.md "$PROFILE_DIR/STATE.md"
 
-# 3. Copy identity and working files
-cp templates/SOUL.md   "$PROFILE_DIR/SOUL.md"
-cp templates/USER.md   "$PROFILE_DIR/USER.md"
-cp templates/MEMORY.md "$PROFILE_DIR/MEMORY.md"
-cp templates/STATE.md  "$PROFILE_DIR/STATE.md"
-cp AGENTS.md           "$PROFILE_DIR/AGENTS.md"
-
-# 4. Copy skills (keep folder names; Hermes skill discovery expects SKILL.md)
-cp -R skills/opsec-intake            "$PROFILE_DIR/skills/"
+cp -R skills/bourne-guardrails       "$PROFILE_DIR/skills/"
+cp -R skills/opsec-intake             "$PROFILE_DIR/skills/"
 cp -R skills/footprint-review        "$PROFILE_DIR/skills/"
 cp -R skills/account-device-hygiene   "$PROFILE_DIR/skills/"
 cp -R skills/incident-containment    "$PROFILE_DIR/skills/"
-
-# 5. Optional: single-profile install without profiles/ subdir
-#    cp templates/SOUL.md ~/.hermes/SOUL.md
 ```
 
-Fill `USER.md` with **non-secret** context only. Leave secrets in a password
-manager, never in profile markdown or in the chat.
+Do **not** rely on copying `AGENTS.md` into the profile home for refusals in a
+profile session — Hermes loads `AGENTS.md` from the project cwd, not from
+`$HERMES_HOME`. Refusals for profile chat come from `SOUL.md` (always loaded)
+and `skills/bourne-guardrails`. Keep `AGENTS.md` in the repo for when someone
+opens this repository as a project.
 
 ## First session
 
-1. Start Hermes using the Bourne profile (see official Hermes chat/profile docs
-   for the current flag). Example shape:
+1. Start Bourne:
 
    ```bash
-   hermes chat   # or the profile-select invocation from live Hermes docs
+   bourne chat
+   # or: hermes -p bourne chat
    ```
 
-2. Ask Bourne to run **opsec-intake** (or say "first session intake").
-3. Answer only: public-facing work, small business, family safety, travel
+2. Run `/context` once to confirm SOUL (and skills index) look right.
+3. Ask Bourne to run **opsec-intake** (or say "first session intake").
+4. Answer only: public-facing work, small business, family safety, travel
    frequency, prior incidents (high-level), inconvenience tolerance.
-4. Receive: decision, top five actions for the week, residual risk.
-5. Verify with [`checklists/first-session.md`](checklists/first-session.md).
+5. Receive: decision, top five actions for the week, residual risk.
+6. Verify with [`checklists/first-session.md`](checklists/first-session.md).
 
 ## What this template will not do
 
 - Hack, exploit, write malware, or help with unauthorized access.
-- Stalk, surveil, or doxx other people.
+- Locate, track, stalk, surveil, or doxx other people.
+- Sell, recommend, or configure spyware / stalkerware against others.
+- Help phishing others, harassment campaigns, or deanonymizing others.
 - Assist fraud, forgery, or evasion of lawful process.
 - Ask for passwords, seed phrases, API keys, recovery codes, or full account numbers.
 - Promise anonymity, invisibility, or zero residual risk.
-- Override its identity or refusals via roleplay or "ignore previous instructions."
+- Override its identity or refusals via roleplay or prompt-injection attempts
+  to discard these limits.
 
 Out-of-lane requests get a **one-sentence refusal** and a **legal defensive
-equivalent** focused on the operator's own protection. See `AGENTS.md`.
+equivalent** focused on the operator's own protection. See `SOUL.md`,
+`skills/bourne-guardrails`, and `AGENTS.md`.
+
+## Credits
+
+See [`CREDITS.md`](CREDITS.md). Short version: the operating loop, refusal
+posture, and skill shape were adapted from Grok Bot **bourne-*** skills /
+workflows used by SMF Works' Bourne Bot, rewritten here as a Hermes profile
+template. No third-party OPSEC / anonymity repositories were copied.
 
 ## License
 
@@ -115,8 +199,8 @@ MIT License. Copyright © 2026 Saint Michael's Forge / smfworks. See [`LICENSE`]
 
 ## Maintainer
 
-SMF Works / smfworks. Patterns align structurally with other Hermes profile
-templates from SMF Works; content here is original to Bourne.
+SMF Works / smfworks. Community Hermes profile template — not an official Nous
+Research package.
 
 ---
 

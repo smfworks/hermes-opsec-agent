@@ -1,0 +1,12 @@
+name: trigger-phrase-check
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  grep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for Hermes scanner tripwire phrases
+        run: bash scripts/check-trigger-phrases.sh
