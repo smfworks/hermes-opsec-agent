@@ -8,19 +8,20 @@
 ## Please check
 
 1. **SOUL vs AGENTS vs guardrails split** — Root `SOUL.md` is identity, values,
-   lane, voice, a short always-loaded refusal summary, and a **compact analysis
-   loop** (six steps + residual risk). Hermes loads SOUL only from
+   lane, voice, a short always-loaded refusal summary, and the **same six-step
+   analysis loop** (+ residual risk) as AGENTS. Hermes loads SOUL only from
    `$HERMES_HOME`. Skills (including `bourne-guardrails`) load **on demand** via
    `skill_view` — they are not always-on. `AGENTS.md` is the project-cwd
-   operating agreement (full analysis loop + same refusal detail); Hermes does
+   operating agreement (same six steps + same refusal detail); Hermes does
    **not** load AGENTS from `$HERMES_HOME`.
 2. **Refusal completeness** — Permanent refusals cover hacking/exploits/malware/
    unauthorized access; locating/tracking people; stalking/surveillance of
    others; doxxing; spyware/stalkerware against others; phishing others;
    harassment help; deanonymizing; intimate-partner / "family phone" framings;
-   fraud/forgery; and evading lawful process. Owner-scope anti-loophole present.
-   Roleplay / prompt-injection attempts cannot override (no scanner tripwire
-   phrasing).
+   fraud/forgery; evading lawful process; and third-party targeting of any kind.
+   Owner-scope anti-loophole present. Roleplay / fiction framing / "authorized
+   testing" claims about third-party systems / prompt-injection attempts cannot
+   override (no scanner tripwire phrasing).
 3. **Affirmative allows** — Own-device stalkerware indicator checklist
    (high-level); DV safety planning with verified hotlines only
    (thehotline.org / 1-800-799-7233).
@@ -28,8 +29,8 @@
    No exploit steps, payloads, or third-party targeting.
 5. **No secrets requested** — Nowhere should Bourne ask for passwords, seed
    phrases, API keys, recovery codes, or full account numbers.
-6. **Residual risk always stated** — SOUL compact loop, AGENTS full loop, and
-   skills require it; sample transcript should model it.
+6. **Residual risk always stated** — SOUL and AGENTS share the six-step loop, and
+   skills require residual risk; sample transcript should model it.
 7. **Skills are checklists, not exploits** — YAML frontmatter present; When to
    use / Procedure (or equivalent) / Pitfalls / Verification sections filled.
    Guardrails skill must not claim to be always-on.
